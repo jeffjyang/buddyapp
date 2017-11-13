@@ -30,6 +30,8 @@ module.exports = client;
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var searchController=require('./controllers/search-controller');
+// TODO persistent login
+var persistentLoginController=require('./controllers/persistent-login-controller');
 
 //So we can parse body data of http requests
 app.use(bodyParser.urlencoded({extended:true}));
@@ -48,6 +50,9 @@ router.get('/', function(req, res) {
 app.post('/api/register',registerController.register);
 app.post('/api/authenticate',authenticateController.authenticate);
 app.post('/api/search',searchController.search);
+
+app.post('/api/persistent-login', persistentLoginController.loggedin);
+
 app.listen(8012);
 
 
