@@ -19,10 +19,16 @@ function newConnection(socket) {
 
 }
 
-function tripFound(trip) {
-  // find the correct user for this trip
-  // assuming trip has a field callsd username
-  // TODO what about other user???
-  io.sockets.socket(users[trip.username]).emit('tripFound', trip);
+/*
+  function to be called when a trip has been made
 
+  param trip
+    json object representing a match (trip)
+*/
+function tripFound(trip) {
+  // loop through each user in the trip and inform them that a trip has been found
+  for (var i = 0; i < trip.user_ids.length; i ++) {
+    io.sockets.socket(users[trip.user_ids[i]]).emit('tripFound', trip);
+
+  }
 }
